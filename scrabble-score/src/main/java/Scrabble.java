@@ -1,34 +1,33 @@
-import java.util.Map;
 import java.util.HashMap;
 
 public class Scrabble {
     private final String word;
-    private final Map<Character, Integer> letterScore;
+    private static final HashMap<Integer, Integer> letterScore = new HashMap<>('Z' - 'A');
 
     public Scrabble(String word) {
         this.word = word;
-        this.letterScore = initLetterScore();
     }
 
     public int getScore() {
-        if(word==null) { return 0; }
+        if(word==null) return 0;
 
-        int sum = 0;
-        for(Character c: word.toUpperCase().toCharArray()) {
-            sum += letterScore.containsKey(c) ? letterScore.get(c) : 0;
-        }
-        return sum;
+        return word.toUpperCase()
+            .chars()
+            .map(c -> letterScore.getOrDefault(c, 0))
+            .reduce(0, (a, b) -> a + b);
     }
 
-    private static Map<Character, Integer> initLetterScore() {
-        Map<Character, Integer> letterScore = new HashMap<Character, Integer>();
-        String[] letterGroups =  {"AEIOULNRST", "DG", "BCMP", "FHVWY", "K", "JX", "QZ"};
-        Integer[] letterValues = {           1,    2,      3,       4,   5,    8,   10};
-        for(int i = 0; i < letterGroups.length; i++) {
-            for(Character c: letterGroups[i].toCharArray()) {
-                letterScore.put(c, letterValues[i]);
-            }
-        }
-        return letterScore;
+    private static void mapToScore(String letters, Integer score) {
+        letters.chars().forEach(letter -> letterScore.put(letter, score));
+    }
+
+    static {
+        mapToScore("AEIOULNRST", 1);
+        mapToScore("DG", 2);
+        mapToScore("BCMP", 3);
+        mapToScore("FHVWY", 4);
+        mapToScore("K", 5);
+        mapToScore("JX", 8);
+        mapToScore("QZ", 10);
     }
 } 
