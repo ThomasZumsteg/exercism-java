@@ -5,9 +5,9 @@ import java.util.HashMap;
 public class Etl {
     public Map<String, Integer> transform(Map<Integer, List<String>> oldMap) {
         final Map<String, Integer> newMap = new HashMap<String, Integer>();
-        for(Integer key: oldMap.keySet()) {
-            for(String val: oldMap.get(key)) {
-                newMap.put(val.toLowerCase(), key);
+        for(Map.Entry<Integer, List<String>> entry: oldMap.entrySet()) {
+            for(String val: entry.getValue()) {
+                newMap.put(val.toLowerCase(), entry.getKey());
             }
         }
         return newMap;
