@@ -5,7 +5,7 @@ public class Sieve {
     private boolean[] sieve;
 
     public Sieve(int limit) {
-        sieve = new boolean[limit];
+        sieve = new boolean[limit + 1];
     }
 
     public List<Integer> getPrimes() {
