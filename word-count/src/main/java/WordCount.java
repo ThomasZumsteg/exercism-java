@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WordCount {
-    public Map<String, Integer> Phrase(String sentence) {
+    public Map<String, Integer> phrase(String sentence) {
         Map<String, Integer> wordCounts = new HashMap<String, Integer>();
         String[] words = sentence.toLowerCase().replaceAll("[^a-z0-9 ]", "").split("\\s+");
         for(String word: words) {
