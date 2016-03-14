@@ -1,14 +1,12 @@
 import java.util.NoSuchElementException;
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Array;
 
 public class SimpleLinkedList<T> {
-    private Element<T> root;
+    private Element<T> root = null;
+    private Integer size = 0;
 
-    public SimpleLinkedList() {
-        //SimpleLinkedList creates a linked list with no values
-        this.root = null;
-    }
+    //SimpleLinkedList creates a linked list with no values
+    public SimpleLinkedList() { }
 
     public SimpleLinkedList(T[] values) {
         //SimpleLinkedList creaets a linked list from an array of values
@@ -18,9 +16,6 @@ public class SimpleLinkedList<T> {
 
    public Integer size() {
        //size the size of the linked list
-       Integer size = 0;
-       for(Element<T> e = root; e != null; e = e.next)
-           size++;
        return size;
    } 
 
@@ -30,6 +25,7 @@ public class SimpleLinkedList<T> {
            throw new NoSuchElementException();
        T value = root.value;
        root = root.next;
+       size--;
        return value;
    }
        
@@ -39,11 +35,12 @@ public class SimpleLinkedList<T> {
        e.value = value;
        e.next = root;
        root = e;
+       size++;
    }
 
    public T[] asArray(Class<T> type) {
        //asArray creates an array from the linked list
-       T[] array = (T[])new Object[size()];
+       T[] array = (T[])Array.newInstance(type, size());
        Element<T> e = root;
        for(int i = 0; e != null; e = e.next, i++)
            array[i] = e.value;
