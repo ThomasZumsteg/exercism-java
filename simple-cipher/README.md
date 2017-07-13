@@ -42,7 +42,7 @@ Here's an example:
     @cipher = Cipher.new("aaaaaaaaaaaaaaaaaa")
     @cipher.encode("iamapandabear") #=> "iamapandabear"
     @cipher = Cipher.new("ddddddddddddddddd")
-    @cipher.encode("imapandabear") #=> "lpdsdqgdehdu"
+    @cipher.encode("imapandabear") #=> "ldpdsdqgdehdu"
 
 In the example above, we've set a = 0 for the key value. So when the
 plaintext is added to the key, we end up with the same message coming
